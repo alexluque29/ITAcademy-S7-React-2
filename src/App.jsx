@@ -1,4 +1,7 @@
+
 import { useState } from "react";
+import { Pages } from "./components/Pages";
+import { Panell } from "./styled";
 
 export const App = () => {
   const [precioTotal, setprecioTotal] = useState(0);
@@ -6,7 +9,7 @@ export const App = () => {
   const [checkbox, setCheckbox] = useState({
     web: false,
     seo: false,
-    ads: false,
+    ads: false,  
   });
 
   const handleInputChange = ({ target }) => {
@@ -26,10 +29,29 @@ export const App = () => {
         [name]: checked,
       });
     }
-  };
+  }; 
 
-  console.log(checkbox);
+  let checkWebStatus = checkbox.web;  
 
+  const [variables, setVariables] = useState ({
+    pages: 1,
+    languages: 1
+  })
+
+  const {pages, languages} = variables
+  
+  const handleVariablesChange = ({ target }) => {
+    const { name, value } = target;
+    setVariables ({
+      ...variables, 
+      [name]: value,
+    });
+  } 
+
+  let pageVar = (pages > 1) ? (pages * 30) : 0;
+  let langVar = (languages > 1) ? (languages * 30) : 0;
+  let totalVariables = (pageVar + langVar);
+  
   return (
     <>
       <form>
@@ -40,17 +62,24 @@ export const App = () => {
           id="check01"
           name="web"
           value="500"
-          onChange={handleInputChange}
-        />{" "}
+          onChange={ handleInputChange }
+          />
         Una pàgina web (500 €)
+          <Panell isShowed={ checkWebStatus }>
+          <Pages
+           onChange = { handleVariablesChange }
+           pageValue = { pages }
+           langValue = { languages }
+          />
+          </Panell>
         <br />
         <input
           type="checkbox"
           id="check02"
           name="seo"
           value="300"
-          onChange={handleInputChange}
-        />{" "}
+          onChange={ handleInputChange }
+        />
         Una consultoria SEO (300 €)
         <br />
         <input
@@ -58,11 +87,11 @@ export const App = () => {
           id="check03"
           name="ads"
           value="200"
-          onChange={handleInputChange}
-        />{" "}
+          onChange={ handleInputChange }
+        />
         Una campanya de Google Ads (200 €)
         <br />
-        <h4>Preu: {precioTotal} €</h4>
+        <h4>Preu: { precioTotal + totalVariables } €</h4>
       </form>
     </>
   );
