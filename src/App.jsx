@@ -48,6 +48,44 @@ export const App = () => {
     });
   } 
 
+  //******************* Funciones de los botones *******************
+
+  const handleAddPage = (e) => {
+    setVariables({
+      ...variables,
+      pages: pages + 1,
+    });
+    e.preventDefault();
+  };
+
+  const handleSubstractPage = (e) => {
+    if (pages > 1) {
+      setVariables({
+        ...variables,
+        pages: pages - 1,
+      });
+    } 
+    e.preventDefault();
+  };
+
+  const handleAddLang = (e) => {
+    setVariables({
+      ...variables,
+      languages: languages + 1,
+    });
+    e.preventDefault();
+  };
+
+  const handleSubstractLang = (e) => {
+    if (languages > 1) {
+      setVariables({
+        ...variables,
+        languages: languages - 1,
+      });
+    } 
+    e.preventDefault();
+  }; 
+
   let pageVar = (pages > 1) ? (pages * 30) : 0;
   let langVar = (languages > 1) ? (languages * 30) : 0;
   let totalVariables = (pageVar + langVar);
@@ -67,9 +105,13 @@ export const App = () => {
         Una pàgina web (500 €)
           <Panell isShowed={ checkWebStatus }>
           <Pages
-           onChange = { handleVariablesChange }
            pageValue = { pages }
            langValue = { languages }
+           onChange = { handleVariablesChange }
+           addPage = { handleAddPage }
+           subPage = { handleSubstractPage }
+           addLang = { handleAddLang }
+           subLang = { handleSubstractLang }
           />
           </Panell>
         <br />

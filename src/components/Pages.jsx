@@ -1,31 +1,33 @@
 
-export const Pages = (props) => { 
+export const Pages = (props) => {   
 
   return (
     <>
         <br />
-        <label className='pages'>Número de pàgines </label>
-        < input
-          type="number"
+        <label>Número de pàgines </label>
+        <button className="button-sub" onClick={ props.subPage }>-</button>
+        < input          
+          type="text"
+          size="1"
           name="pages"
-          placeholder="1"
-          min="1"
-          max="20"                 
+          placeholder="1"                          
           onChange={ props.onChange }
           value= { props.pageValue }
           />
+          <button className="button-sub"onClick={ props.addPage }>+</button>
             
         <br />
-        <label className='pages' >Número d'idiomes </label>
+        <label>Número d'idiomes </label>
+        <button className="button-sub" onClick={ props.subLang }>-</button>
         <input
-          type="number"
+          type="text"
+          size="1"
           name="languages"
-          placeholder="1"
-          min="1"
-          max="5"
+          placeholder="1"          
           onChange={ props.onChange }
           value= { props.langValue }
         />
+          <button className="button-sub" onClick={ props.addLang }>+</button>
     </>
   )
 }
