@@ -1,16 +1,27 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Pages } from "./components/Pages";
 import { Panell } from "./styled";
 
 export const App = () => {
   const [precioTotal, setprecioTotal] = useState(0);
 
+  useEffect(()=> {
+    const checkbox = JSON.parse(localStorage.getItem("checkbox"));
+    if (checkbox) {
+      setCheckbox(checkbox);
+    }
+  }, []);
+
   const [checkbox, setCheckbox] = useState({
     web: false,
     seo: false,
     ads: false,  
-  });
+  }); 
+
+  useEffect (()=> {
+    localStorage.setItem("checkbox", JSON.stringify(checkbox));
+  }, [checkbox]);
 
   const handleInputChange = ({ target }) => {
     const { checked, value, name } = target;
