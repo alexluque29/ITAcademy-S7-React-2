@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
-import { Pages } from "./components/Pages";
-import { Panell } from "./styled";
+import { Pages } from "./Pages";
+import { Panell } from "../styled";
 
 export const App = () => {
   const [precioTotal, setprecioTotal] = useState(0);
@@ -58,6 +58,8 @@ export const App = () => {
       [name]: value,
     });
   } 
+
+  console.log (checkbox);
 
   //******************* Funciones de los botones *******************
 
