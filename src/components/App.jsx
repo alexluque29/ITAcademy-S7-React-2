@@ -96,8 +96,8 @@ export const App = () => {
         languages: languages - 1,
       });
     } 
-    e.preventDefault();
-  }; 
+    e.preventDefault();  };   
+    
 
   let pageVar = (pages > 1) ? (pages * 30) : 0;
   let langVar = (languages > 1) ? (languages * 30) : 0;

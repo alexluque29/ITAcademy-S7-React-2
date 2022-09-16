@@ -2,15 +2,15 @@
 import styled from "styled-components";
 
 export const Panell = styled.div`
-  width: 300px;
-  height: 100px;
+  width: 350px;
+  height: 125px;
   border: solid 3px blue;
   border-radius: 10px;
   text-align: center;
   display: ${({ isShowed }) => (isShowed ? "block" : "none")};
   
   input {
-    margin: 3px 0 3px 0;
+    margin: 4px 4px 10px 4px;
     border-radius: 5px;
     width: 30px;
   };
@@ -22,12 +22,21 @@ export const Panell = styled.div`
     border-radius: 5px;
     font-weight: bold;
     transition-duration: 0.4s;
-    margin: 0 4px 0 4px;
+    margin: 0 4px 0 4px;º
   }
-
+  
   .button-sub:hover {
     background-color: blue;
     color: white;
     cursor: pointer;
   }
-`;
+  
+  .button-info{
+    width: 20px;
+    height: 20px;
+  }
+  
+  .button-info:hover {
+    cursor: pointer;
+  }
+  `;
