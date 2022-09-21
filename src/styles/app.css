@@ -1,0 +1,25 @@
+
+
+
+.cont {
+    display: flex;    
+    justify-content: space-around;
+    font-family: 'Quicksand', sans-serif;
+}
+
+button {
+    background-color: #374b64;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: white;
+    color: #374b64;
+    cursor: pointer;
+}

@@ -22,7 +22,7 @@ export const Panell = styled.div`
     border-radius: 5px;
     font-weight: bold;
     transition-duration: 0.4s;
-    margin: 0 4px 0 4px;º
+    margin: 0 4px 0 4px;
   }
   
   .button-sub:hover {
