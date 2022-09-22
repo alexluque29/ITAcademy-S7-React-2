@@ -104,32 +104,17 @@ export const App = () => {
   // ************************BUDGETS***********************************
 
   // STATES
-  let initialPressupostos = [
-    {
-      nom: "Test-1",
-      client: "Luis Vicente",
-      preu: "500",
-      data: "21/9/2022/ a les 16:00 h",
-    },
-    {
-      nom: "Test-2",
-      client: "Alex Luque",
-      preu: "300",
-      data: "21/9/2022/ a les 16:00 h",
-    },
-  ];
+  let initialPressupostos = [];
 
   const [budget, setBudget] = useState({
-    nom: "",
     client: "",
+    nom: "",
     preu: 0,
     data: "",
   });
 
   const [pressupostos, setPressupostos] = useState(initialPressupostos);
-
-  console.log("longitud", pressupostos.length);
-
+  
   // INPUT CHANGE
   const onInputChange = ({ target }) => {
     const { name, value } = target;
@@ -137,10 +122,10 @@ export const App = () => {
       ...budget,
       [name]: value,
       preu: preu,
-      data: data,
+      data: current,
     });
   };
-
+  
   // PRESS BUTTON SAVE
   const onSubmit = (event) => {
     event.preventDefault();
@@ -148,16 +133,30 @@ export const App = () => {
     newPressupostos.push(budget);
     setPressupostos(newPressupostos);
     document.getElementById("input-form").reset();
-    document.getElementById("input-opt").reset();
+    document.getElementById("input-opt").reset();    
   };
-  console.log("longitud post boton", pressupostos.length);
+  
+  //******************New Date() Function*******************  
+  
+  const current = new Date();  
 
-  //******************New Date() Function*******************
-
-  const current = new Date();
-  const data = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}/ a les ${current.getHours()}:${current.getMinutes()} h.`;
+  //******************Sort Functions*******************
+  
+  function sortByAlf() {
+    let ordena = pressupostos.slice().sort((a, b) => {
+      if (a.client.toLowerCase() < b.client.toLowerCase()) {return -1;}
+      if (a.client.toLowerCase() > b.client.toLowerCase()) {return 1;}
+      return 0;     
+    });
+    setPressupostos([...ordena]);
+  };  
+  
+  function sortByDate() {
+    let ordena = pressupostos.slice().sort((a, b) => {
+      return b.data - a.data 
+    });
+    setPressupostos([...ordena]);
+  };
 
   return (
     <>
@@ -209,15 +208,7 @@ export const App = () => {
           {/* ************** CUSTOMER INPUTS *****************  */}
 
           <form id="input-form">
-            <label>Nom del pressupost: </label>
-            <input
-              type="text"
-              placeholder="Pressupost"
-              name="nom"
-              onChange={onInputChange}
-            />
-            <br />
-            <label>Nom del client: </label>
+          <label>Nom del client: </label>
             <input
               type="text"
               placeholder="Client"
@@ -225,10 +216,19 @@ export const App = () => {
               onChange={onInputChange}
             />
             <br />
+            <label>Nom del pressupost: </label>
+            <input
+              type="text"
+              placeholder="Pressupost"
+              name="nom"
+              onChange={onInputChange}
+            />
+            
             <br />
-            <h4>Preu: {preu} €</h4>
             <br />
-            <button type="submit" onClick={onSubmit}>
+            <h4 id="preuTotal">Preu: {preu} €</h4>
+            <br />
+            <button className="bot-envia"  type="submit" onClick={onSubmit}>
               Afegir pressupost
             </button>
           </form>
@@ -237,20 +237,31 @@ export const App = () => {
           <h3>
             <u>Llistat de pressupostos</u>
           </h3>
-          <ol>
-            {pressupostos.length <= 1 ? (
-              <div></div>
+          <br />
+          <div className="bot-ordenar">
+              <button className="bot-ord" type="button" onClick={ sortByAlf }>Ordenar A-Z</button>
+              <button className="bot-ord" type="button" onClick={ sortByDate }>Ordenar Dates</button>
+              
+              {/* La función que resetea el listado es la misma que ordena por fechas debido a que ése es el orden
+              en el que se van introduciendo los nuevos presupuestos en el array. */}
+              <button className="bot-ord" type="button" onClick={ sortByDate }>Reset</button>
+          </div>
+          <br />
+          <ul>
+            {pressupostos.length === 0 ? (
+              <div className="senPre">- Sense pressupostos -</div>
             ) : (
               <div>
                 {pressupostos.map((item, i) => (
                   <li className="llistat" key={i}>
-                    {`Press. ${item.nom}  Client: ${item.client}  Total: ${item.preu} €.  Creat el ${item.data}`}
+                    {`Client. ${item.client}  Press: ${item.nom}  Total: ${item.preu} €.  a data: ${item.data.getFullYear()}/${item.data.getMonth()+1}/${item.data.getDate()} 
+                    ${item.data.getHours()}:${item.data.getMinutes()}:${item.data.getSeconds()} h.`}
                     <hr />
                   </li>
                 ))}
               </div>
             )}
-          </ol>
+          </ul>
         </div>
       </div>
     </>

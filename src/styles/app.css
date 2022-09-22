@@ -1,14 +1,36 @@
-
-
-
 .cont {
     display: flex;    
     justify-content: space-around;
     font-family: 'Quicksand', sans-serif;
 }
 
-button {
+.bot-ordenar {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bot-ord {
     background-color: #374b64;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.bot-ord:hover {
+    background-color: white;
+    color: #374b64;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.bot-envia {
+    background-color: rgb(37, 168, 72);
     border: none;
     color: white;
     padding: 8px 16px;
@@ -18,8 +40,12 @@ button {
     font-size: 16px;
 }
 
-button:hover {
-    background-color: white;
-    color: #374b64;
+.bot-envia:hover {
+    background-color: white;  
+    color: rgb(37, 168, 72);
     cursor: pointer;
+}
+
+.senPre {
+    color: red;
 }
